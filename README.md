@@ -1,2 +1,2 @@
 # redbox-ratings
-the ratings fr your redbox titles
+the ratings for your redbox titles
