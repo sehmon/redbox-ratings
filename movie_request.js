@@ -1,3 +1,8 @@
+require('./movie_request.js');
+getMovieData('cloud atlas');
+var movies = ['force awakens', 'interstellar', 'premium rush', 'super 8'];
+batchMovieRequest(movies);
+
 function getMovieData(movie){
 
     var baseUrl = "http://www.omdbapi.com/?t=";
@@ -11,10 +16,15 @@ function getMovieData(movie){
 
     request(fullUrl, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-        console.log(body) // Show the HTML for the Google homepage. 
+        console.log(body)
     }
 })}
 
+function batchMovieRequest(movieList){
 
-getMovieData("cloud atlas")
-getMovieData("force awakens")
+    var arrayLength = movieList.length;
+    for (var i = 0; i < arrayLength; i++){
+        getMovieData(movieList[i]);
+    }
+
+}
