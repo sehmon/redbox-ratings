@@ -1,30 +1,25 @@
-require('./movie_request.js');
-getMovieData('cloud atlas');
-var movies = ['force awakens', 'interstellar', 'premium rush', 'super 8'];
-batchMovieRequest(movies);
-
-function getMovieData(movie){
-
+function findMovie (movieName) {
+    var http = require('http');
     var baseUrl = "http://www.omdbapi.com/?t=";
-    var params = movie.split(' ').join('+');
+    var params = movieName.split(' ').join('+');
     var end = "&y=&plot=short&r=json";
+    var finalUrl = baseUrl + params + end;
 
-    var fullUrl = baseUrl + params + end;
-
-
-    var request = require('request');
-
-    request(fullUrl, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-        console.log(body)
-    }
-})}
+    http.get(finalUrl, function (response, body) {
+        console.log('Got response: ' + response.statusCode);
+        
+        response.on('data', function(contents){
+            contents = JSON.parse(contents);
+            console.log(contents.Title);
+        });
+    }).on('error', function(err){
+        console.log("Error");
+    });
+}
 
 function batchMovieRequest(movieList){
-
     var arrayLength = movieList.length;
     for (var i = 0; i < arrayLength; i++){
-        getMovieData(movieList[i]);
+        findMovie(movieList[i]);
     }
-
 }
