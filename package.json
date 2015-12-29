@@ -1,0 +1,10 @@
+{
+  "name"         : "redbox-ratings",
+  "version"      : "0.0.1",
+  "description"  : "Find ratings for redbox",
+  "dependencies" : {
+    "express"    : "latest",
+    "request"    : "latest",
+    "cheerio"    : "latest"
+  }
+}
